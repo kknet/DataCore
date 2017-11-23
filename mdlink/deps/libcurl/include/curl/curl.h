@@ -58,17 +58,18 @@
 #include <sys/types.h>
 #include <time.h>
 
+#if defined(WIN32)
+#include <winsock2.h>
+#endif
+
 #if defined(WIN32) && !defined(_WIN32_WCE) && !defined(__CYGWIN__)
 #if !(defined(_WINSOCKAPI_) || defined(_WINSOCK_H) || \
       defined(__LWIP_OPT_H__) || defined(LWIP_HDR_OPT_H))
 /* The check above prevents the winsock2 inclusion if winsock.h already was
    included, since they can't co-exist without problems */
-#include <winsock2.h>
 #include <ws2tcpip.h>
 #endif
 #endif
-
-#include <winsock2.h>
 
 /* HP-UX systems version 9, 10 and 11 lack sys/select.h and so does oldish
    libc5-based Linux systems. Only include it on systems that are known to
