@@ -29,11 +29,11 @@ include_directories(
     ../../../deps/libcurl/include/curl
 )
 
+
+if (WIN32)
 link_directories(    
     ${CMAKE_CURRENT_SOURCE_DIR}/../../../deps/libcurl/lib  
 )
-
-if (WIN32)
 
 include_directories(
     ../../../deps/windows/zlib-1.2.8
@@ -42,6 +42,7 @@ include_directories(
 else()
 
 add_definitions(-std=c++11)
+
 
 endif()
 
@@ -62,7 +63,7 @@ target_link_libraries( mdlink_sina
 else()
 
 target_link_libraries( mdlink_sina 
-    libcurl
+    libcurl.so
     base
     msgbus
     zmq   
@@ -80,4 +81,4 @@ if (WIN32)
  )
 endif()
 
-install (TARGETS mdlink_sina RUNTIME DESTINATION ${BIN_PATH})
+install (TARGETS mdlink_sina  RUNTIME DESTINATION ${BIN_PATH})
