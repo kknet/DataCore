@@ -175,9 +175,6 @@ bool SinaMdServer::sina_to_jzs(shared_ptr<sina_api::MarketQuote> md, MarketQuote
 void SinaMdServer::Start()
 {
     m_thread = new std::thread(&SinaMdServer::Run, std::ref(*this));
-#ifdef __linux__
-    new thread(&MdServer::writeMMapFile, this);
-#endif
 }
 
 void SinaMdServer::Run()
